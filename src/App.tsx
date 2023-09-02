@@ -12,12 +12,15 @@ function App() {
   return (
     <>
       <Navbar />
+      <div className="container mx-auto text-center px-4 py-10">
+
       <Routes>
         <Route path="/" element={<Home/>} />
         {/* <Route path="/home" element={<Redirect to="/" />} /> */}
         <Route path="/about" element={<About/>} />
         <Route path="/natiq" element={<Natiq />} />
       </Routes>
+      </div>
     </>
   )
 }
