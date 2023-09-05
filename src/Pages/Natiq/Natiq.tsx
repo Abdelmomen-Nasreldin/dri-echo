@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, ChangeEvent } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 
 const Natiq = () => {
@@ -6,13 +6,13 @@ const Natiq = () => {
     const [text, setText] = useState(""); // The user input
     const [loading, setLoading] = useState(false); // The loading state
     const [error, setError] = useState(null); // The error state
-    const [audio, setAudio] = useState<"string" | null>(null); // The audio data
+    const [audio, setAudio] = useState<string| null>(null); // The audio data
 
     // Define a ref for the audio player
-    const playerRef = useRef(null);
+    const playerRef = useRef<HTMLAudioElement | null>(null);
 
     // Define a function to handle text input change
-    const handleChange = useCallback((e) => {
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         // Get the input value
         const value = e.target.value;
         // Set the text state
@@ -43,7 +43,7 @@ const Natiq = () => {
                 const base64 = wave.replace(/-/g, "+").replace(/_/g, "/");
                 const padding = "=".repeat((4 - (base64.length % 4)) % 4);
                 const paddedBase64 = base64 + padding;
-                const audioData = `data:audio/wav;base64,${paddedBase64}`;
+                const audioData: string | null = `data:audio/wav;base64,${paddedBase64}`;
                 setAudio(audioData);
             })
             .catch((error) => {
